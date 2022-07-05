@@ -1,0 +1,12 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.image_galary
+{
+    width: 70%;
+    height: 30%;
+}
