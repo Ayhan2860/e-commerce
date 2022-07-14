@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/AuthContext';
 import Dropdown from '../dropdown';
 function Navbar() {
-    const {loggedIn} = useAuth();
+    const {loggedIn, user} = useAuth();
     return <>
      <nav className={styles.nav}>
       <div className={styles.left} >
@@ -28,7 +28,12 @@ function Navbar() {
             </Link>
         </>
         }
-
+        { 
+        user?.role  === "admin" && 
+        <Link style={{marginRight:"10px"}} to="/admin">
+            <Button colorScheme="teal" variant="ghost" >Admin</Button>
+        </Link>  
+        }
         { loggedIn && <Dropdown/>  }
       </div>
      </nav>

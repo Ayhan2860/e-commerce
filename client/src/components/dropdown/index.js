@@ -14,12 +14,14 @@ import { CSSTransition } from 'react-transition-group';
 import { MdChevronRight } from 'react-icons/md';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBasket } from '../../contexts/BasketContext';
 
 
 
 export default function Dropdown() {
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
+  const {items} = useBasket()
   const {user, logout} = useAuth()
   let navigate = useNavigate();
   const handleLogout = async ()=>{
@@ -58,7 +60,18 @@ export default function Dropdown() {
                 </Box>
               </MenuItem>
              </NavLink>
-
+               {
+                  items.length > 0 && (
+                    <NavLink  to="/basket">
+                    <MenuItem m="10px 0" h="40px"  onClick={() => setActiveMenu('profile')}>
+                     <Text  >Basket</Text>
+                    <Box pos="absolute" ml="80%">
+                       {items.length}
+                    </Box>
+                  </MenuItem>
+                 </NavLink>
+                  )
+               }
               
               <MenuItem h="40px" onClick={handleLogout}>
                 <Text>Logout</Text>

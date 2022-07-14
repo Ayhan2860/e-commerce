@@ -6,9 +6,14 @@ import styles from './styles.module.css'
 import ImageGallery from 'react-image-gallery';
 import PrivateSpinner from "../../spinner";
 import PrivateAlert from "../../alert";
+import { useBasket } from "../../../contexts/BasketContext";
 
 function ProductDetail() {
-   const {product_id} = useParams()
+   const {product_id} = useParams();
+   const { addToBasket, items } = useBasket();
+   
+   const findBasketItem = items.find((item) => item._id === product_id);
+
     const {isLoading, error, data} = useQuery(["product", product_id], ()=>(fetchProductDetail(product_id)));
     if (isLoading) return <PrivateSpinner/>;
  
@@ -21,7 +26,12 @@ function ProductDetail() {
          <Box overflow="hidden" w="70%">
          <ImageGallery  className={styles.image_galary} items={images} />
          <Box w="20%" margin="10px auto">
-         <Button colorScheme="teal">Add to basket</Button>
+         <Button colorScheme="teal" onClick={()=> addToBasket(data, findBasketItem)} >
+          {
+               findBasketItem ? "Remove from basket" : "Add to basket"
+          }
+
+         </Button>
          </Box>
           <Text w="25%" textAlign="center" margin="10px auto" fontWeight="semibold">{data.title} <br/>
            Price : ₺{data.price}

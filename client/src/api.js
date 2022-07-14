@@ -53,3 +53,35 @@ export const fetchLogout = async()=>
     });
     return data;
 }
+
+export const fetchOrder= async(input)=>
+{
+    const {data} = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/order`, input);
+    return data;
+}
+
+
+export const fetchGetOrder= async()=>
+{
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/order`);
+    return data;
+}
+
+export const deleteProduct= async(id)=>
+{
+    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${id}`);
+    return data;
+}
+
+
+export const updateProduct= async(input, id)=>
+{
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${id}`, input);
+    return data;
+}
+
+export const addedProduct= async(input)=>
+{
+    const {data} = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/product/`, input);
+    return data;
+}
