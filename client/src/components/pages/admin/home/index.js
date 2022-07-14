@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Grid, Text  } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text  } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
 function Home() {
